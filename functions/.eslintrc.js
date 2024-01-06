@@ -29,5 +29,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": ["off"],
     "import/no-unresolved": 0,
     "indent": ["error", 2],
+    "new-cap": 0,
   },
 };
