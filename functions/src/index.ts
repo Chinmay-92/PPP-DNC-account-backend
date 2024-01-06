@@ -19,7 +19,7 @@ import * as bodyParser from "body-parser";
 import * as logger from "firebase-functions/logger";
 
 // initialize firebase inorder to access its services
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp();
 
 const PORT = 3000;
 const app = express();
@@ -34,6 +34,7 @@ app.listen(PORT, () => {
 
 // initialize the database and the collection
 const db = admin.firestore();
+// db.settings({ignoreUndefinedProperties: true});
 const userCollection = "users";
 
 interface User {
@@ -48,23 +49,23 @@ interface User {
 
 // Create new user
 app.post("/users", async (req, res) => {
+  const body = JSON.parse(req.body)
   try {
     const user: User = {
-      firstName: req.body["firstName"],
-      lastName: req.body["lastName"],
-      email: req.body["email"],
-      designation: req.body["designation"],
-      department: req.body["department"],
-      id: req.body["id"],
-      contactNumber: req.body["contactNumber"],
+      firstName: body.firstName,
+      lastName: body.lastName,
+      email: body.email,
+      designation: body.designation,
+      department: body.department,
+      id: body.id,
+      contactNumber: body.contactNumber,
     };
-
     const newDoc = await db.collection(userCollection).add(user);
     logger.info(`Created a new user!: ${newDoc.id}`, {structuredData: true});
     res.status(201).send(`Created a new user: ${newDoc.id}`);
   } catch (error) {
-    res.status(400).send(`User should cointain firstName, lastName, email, 
-    designation, department, id and contactNumber!!!`);
+    res.status(400).send(`${error}: User should cointain firstName, 
+    lastName, email, designation, department, id and contactNumber!!!`);
   }
 });
 
