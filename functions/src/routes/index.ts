@@ -9,9 +9,9 @@
 import * as express from "express";
 
 import {userRoute} from "./userRoute";
-// import {packageRoute} from "./packageRoute";
+import {packageRoute} from "./packageRoute";
 
 export const routes = express.Router();
 
 routes.use(userRoute);
-// routes.use(packageRoute);
+routes.use(packageRoute);
