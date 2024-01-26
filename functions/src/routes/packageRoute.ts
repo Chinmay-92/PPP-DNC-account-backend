@@ -1,8 +1,11 @@
 
 import express from "express";
-import { package_list } from '../controllers/package.controller';
+import { getAllPackages, editPackage, createPackage } from '../controllers/package.controller';
 
 export const packageRoute = express.Router();
 
 // Create new package
-packageRoute.get("/packages", package_list);
+packageRoute.get("/packages", getAllPackages);
+packageRoute.post("/createPackage", createPackage);
+packageRoute.post("/packages/:packageId", editPackage);
+

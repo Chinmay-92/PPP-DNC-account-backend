@@ -19,6 +19,7 @@
     "es-abstract": "^1.22.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "firebase": "^10.7.2",
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.3.1"
   },

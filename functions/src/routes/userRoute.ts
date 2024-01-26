@@ -5,23 +5,16 @@
 import express, {Request, Response} from "express";
 import * as admin from "firebase-admin";
 import { logger } from "firebase-functions/v1";
+import { User } from "../models/user";
+import { getAllUsers } from "../controllers/user.controller";
 
 export const userRoute = express.Router();
-interface User {
-    firstName: string,
-    lastName: string,
-    email: string,
-    designation: string,
-    department: string,
-    id: string,
-    contactNumber: string
-}
 
 // initialize firebase inorder to access its services
-admin.initializeApp();
+export const firebaseAdmin = admin.initializeApp();
 
 // initialize the database and the collection
-const db = admin.firestore();
+export const db = admin.firestore();
 // db.settings({ignoreUndefinedProperties: true});
 const userCollection = "users";
 
@@ -48,7 +41,8 @@ userRoute.post("/users", async (req: Request, res: Response) => {
 });
 
 // get all users
-userRoute.get("/users", async (req: Request, res: Response) => {
+userRoute.get("/users", getAllUsers);
+/* async (req: Request, res: Response) => {
   try {
     const userQuerySnapshot = await db.collection(userCollection).get();
     const users: any[] = [];
@@ -64,7 +58,8 @@ userRoute.get("/users", async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).send(error);
   }
-});
+ });
+*/
 
 // get a single contact
 userRoute.get("/users/:userId", (req: Request, res: Response) => {

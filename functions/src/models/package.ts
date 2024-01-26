@@ -1,5 +1,6 @@
 
-const Package = {
+export interface Package {
+    id: 1,
     packageNumber: 1,
     workName: '',
     tenderAmout: 100,
@@ -28,5 +29,3 @@ const Package = {
     dateTime: '',
     remarks: ''
 }
-
-module.exports = Package
