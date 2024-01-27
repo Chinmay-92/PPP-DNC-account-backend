@@ -6,7 +6,7 @@ import express, {Request, Response} from "express";
 import * as admin from "firebase-admin";
 import { logger } from "firebase-functions/v1";
 import { User } from "../models/user";
-import { getAllUsers } from "../controllers/user.controller";
+import { getAllUsers, loginUser } from "../controllers/user.controller";
 
 export const userRoute = express.Router();
 
@@ -42,24 +42,9 @@ userRoute.post("/users", async (req: Request, res: Response) => {
 
 // get all users
 userRoute.get("/users", getAllUsers);
-/* async (req: Request, res: Response) => {
-  try {
-    const userQuerySnapshot = await db.collection(userCollection).get();
-    const users: any[] = [];
-    userQuerySnapshot.forEach(
-      (doc) => {
-        users.push({
-          id: doc.id,
-          data: doc.data(),
-        });
-      }
-    );
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).send(error);
-  }
- });
-*/
+
+//login user with firebase
+userRoute.post("/login", loginUser);
 
 // get a single contact
 userRoute.get("/users/:userId", (req: Request, res: Response) => {

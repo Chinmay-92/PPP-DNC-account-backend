@@ -8,10 +8,12 @@
     "strict": true,
     "target": "es2017",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "compileOnSave": true,
   "include": [
-    "src"
+    "src",
+    "serviceAccountKey.json"
   ]
 }
