@@ -6,7 +6,7 @@ import express, {Request, Response} from "express";
 import * as admin from "firebase-admin";
 import { logger } from "firebase-functions/v1";
 import { User } from "../models/user";
-import { getAllUsers, loginUser } from "../controllers/user.controller";
+import { getAllUsers, loginUser, getUserById } from "../controllers/user.controller";
 
 export const userRoute = express.Router();
 
@@ -46,17 +46,8 @@ userRoute.get("/users", getAllUsers);
 //login user with firebase
 userRoute.post("/login", loginUser);
 
-// get a single contact
-userRoute.get("/users/:userId", (req: Request, res: Response) => {
-  const userId = req.params.userId;
-  db.collection(userCollection).doc(userId).get()
-    .then((user) => {
-      if (!user.exists) throw new Error("User not found");
-      res.status(200).json({id: user.id, data: user.data()});
-    })
-    .catch((error) => res.status(500).send(error));
-});
-
+// get user by userId
+userRoute.post("/users/:userId", getUserById);
 
 // Delete a user
 userRoute.delete("/users/:userId", (req: Request, res: Response) => {

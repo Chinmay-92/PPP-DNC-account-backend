@@ -9,7 +9,7 @@ export const packageRoute = express.Router();
 // Create new package
 packageRoute.get("/packages", getAllPackages);
 packageRoute.post("/createPackage", [ isAuthenticated,
-    isAuthorized({ hasRole: ['admin', 'manager'] }), createPackage ]);
+    isAuthorized({ hasRole: ['admin', 'user'] }), createPackage ]);
 packageRoute.post("/packages/:packageId", [ isAuthenticated,
-    isAuthorized({ hasRole: ['admin', 'manager'] }), editPackage ]);
+    isAuthorized({ hasRole: ['admin', 'user'] }), editPackage ]);
 

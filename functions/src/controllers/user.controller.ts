@@ -58,3 +58,12 @@ export const loginUser = asyncHandler(async (req: any, res: any, next: any) => {
     });
 })
 
+export const getUserById = asyncHandler(async (req: any, res: any, next: any) => {
+    const userId = req.params.userId;
+    db.collection(userCollection).doc(userId).get()
+        .then((user) => {
+        if (!user.exists) throw new Error("User not found");
+        res.status(200).json({id: user.id, data: user.data()});
+        })
+        .catch((error) => res.status(500).send(error));
+})
