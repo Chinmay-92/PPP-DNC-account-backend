@@ -21,7 +21,8 @@
     "express-async-handler": "^1.2.0",
     "firebase": "^10.7.2",
     "firebase-admin": "^11.11.1",
-    "firebase-functions": "^4.3.1"
+    "firebase-functions": "^4.3.1",
+    "react-native-push-notification": "^8.1.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

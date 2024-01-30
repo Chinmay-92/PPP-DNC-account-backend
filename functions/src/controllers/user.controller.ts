@@ -7,7 +7,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 // const admin = require('firebase-admin');
-// import serviceAccount from '../../service-account-credentials.json';
 
 const serviceAccountJSON = {
     "type": "service_account",
